@@ -1,7 +1,5 @@
 describe('Login', () => {
-  beforeEach(() => {
-    cy.visit('/users/sign_in');
-  });
+  
   it('Login successfully', () => {
     const user = Cypress.env('user_name')
     const password = Cypress.env('user_password')
@@ -11,6 +9,10 @@ describe('Login', () => {
 
     cy.get('.qa-user-avatar').should('be.visible')
   })
+  
+  beforeEach(() => {
+    cy.visit('/users/sign_in');
+  });
 
   it('Error message when typing wrong login and password', () => {
     cy.loginFail('teste','teste')
