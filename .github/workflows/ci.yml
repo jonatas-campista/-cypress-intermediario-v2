@@ -1,31 +1,13 @@
-name: Cypress Tests
-
-on:
-  push:
-    branches:
-      - main
-
+name: End-to-end tests 🧪
+on: [push]
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
-    
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Check out the repository
+        uses: actions/checkout@v3
+      - name: Install dependencies
+        run: npm install
+      - name: Run Cypress tests
+        run: npm run test # Aqui está o comando correto, sem o "npm run build"
 
-    - name: Run GitLab container
-      run: docker run -d wlsf82/gitlab-ce
-
-    - name: Wait for GitLab to be ready
-      run: sleep 30 # Aguarde até o container estar pronto
-
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '12'
-
-    - name: Install dependencies
-      run: npm install
-
-    - name: Run Cypress tests
-      run: npm run test
