@@ -1,6 +1,8 @@
 import { faker } from '@faker-js/faker'
 
-describe('Create Project', () => {
+describe('Create project', () => {
+  beforeEach(() => cy.api_deleteProjects())
+
   it('successfully', () => {
     const project = {
       name: `project-${faker.datatype.uuid()}`,
@@ -13,23 +15,5 @@ describe('Create Project', () => {
         expect(response.body.name).to.equal(project.name)
         expect(response.body.description).to.equal(project.description)
       })
-  })
-
-  Cypress.Commands.add('api_getAllProjects', () => {
-    cy.request({
-      method: 'GET',
-      url: '/api/v4/projects/',
-      headers: { Authorization: accessToken },
-    })
-  })
-  
-  Cypress.Commands.add('api_deleteProjects', () => {
-    cy.api_getAllProjects().then(res =>
-      res.body.forEach(project => cy.request({
-        method: 'DELETE',
-        url: `/api/v4/projects/${project.id}`,
-        headers: { Authorization: accessToken },
-      }))
-    )
   })
 })
