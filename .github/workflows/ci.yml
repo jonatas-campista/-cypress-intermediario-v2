@@ -15,48 +15,14 @@ jobs:
 
     - name: Set up Docker
       run: |
-        docker run --publish 80:80 --hostname localhost wlsf82/gitlab-ce -d
-        
-    - name: Wait for GitLab to be ready
-      run: |
-        sleep 30 # Esperar o container estar totalmente disponível
-
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:name: Cypress Tests
-
-on:
-  push:
-    branches:
-      - main
-
-jobs:
-  cypress-run:
-    runs-on: ubuntu-latest
-    
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Set up Docker
-      run: |
         docker run -d --publish 80:80 --hostname localhost wlsf82/gitlab-ce
         
     - name: Wait for GitLab to be ready
-      run: |
-        sleep 30 # Esperar o container estar totalmente disponível
+      run: sleep 30 # Esperar o container estar totalmente disponível
 
     - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: '12'
-
-    - name: Install dependencies
-      run: npm install
-
-    - name: Run Cypress tests
-      run: npm run test
-
         node-version: '12'
 
     - name: Install dependencies
