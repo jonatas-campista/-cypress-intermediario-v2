@@ -20,13 +20,10 @@ jobs:
     - name: Wait for GitLab to be ready
       run: sleep 80
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '18' # Usar a versão mais recente LTS do Node.js
+    - name: Check out the repository
+      uses: actions/checkout@v3
 
     - name: Install dependencies
       run: npm install
-
     - name: Run Cypress tests
-      run: npm run test
+      run: npm run test # Aqui está o comando correto, sem o "npm run build"
